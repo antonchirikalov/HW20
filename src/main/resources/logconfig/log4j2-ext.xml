@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- log4j2-ext.xml -->
+<Configuration monitorInterval="30" strict="true">
+    
+    <!-- Properties START -->
+    <!-- Important! Usually modifications are only needed in this property section -->
+    <Properties>
+        <property name="pattern.layout">[%-5level] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [ci1429app] [%10.10t] [%45.45c{3.}] [%msg]%n</property>
+        <!-- Do not log to console. Instead log to global log file config on server systems. -->
+        <property name="console.level">DEBUG</property>
+
+        <property name="file.level">OFF</property>
+
+        <property name="file.path">.</property>
+        <property name="file.filename">ci1429app</property>
+        <property name="file.name.layout">%i</property>
+        <property name="file.rollover.files">10</property>
+        <property name="file.rollover.size">10 MB</property>
+    </Properties>
+    <!-- Properties END -->
+
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern.layout}"/>
+            <ThresholdFilter level="${console.level}" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Console>
+
+        <!-- No date based rolling policy until log4j2 supports a totalMax number of log files. -->
+ <!--       <RollingFile name="FILE" fileName="${file.path}/${file.filename}.log" filePattern="${file.path}/${file.filename}.${file.name.layout}.log">
+            <PatternLayout pattern="${pattern.layout}" />
+            <DefaultRolloverStrategy max="${file.rollover.files}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${file.rollover.size}" />
+            </Policies>
+            <ThresholdFilter level="${file.level}" onMatch="ACCEPT" onMismatch="DENY"/>
+        </RollingFile>
+-->
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="javax.activation" level="WARN"/>
+        <Logger name="javax.mail" level="WARN"/>
+        <Logger name="javax.xml.bind" level="WARN"/>
+        <Logger name="ch.qos.logback" level="WARN"/>
+        <Logger name="com.codahale.metrics" level="WARN"/>
+        <Logger name="com.ryantenney" level="WARN"/>
+        <Logger name="com.sun.xml.internal.bind" level="WARN"/>
+        <Logger name="com.zaxxer" level="WARN"/>
+        <Logger name="io.undertow" level="WARN"/>
+        <Logger name="net.sf.ehcache" level="WARN"/>
+        <Logger name="org.apache" level="WARN"/>
+        <Logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+        <Logger name="org.bson" level="WARN"/>
+        <Logger name="org.hibernate.validator" level="WARN"/>
+        <Logger name="org.hibernate" level="WARN"/>
+        <Logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
+        <Logger name="org.springframework" level="INFO"/>
+        <Logger name="org.springframework.web" level="INFO"/>
+        <Logger name="org.springframework.security" level="INFO"/>
+        <Logger name="org.springframework.cache" level="WARN"/>
+        <Logger name="org.thymeleaf" level="WARN"/>
+        <Logger name="org.xnio" level="WARN"/>
+        <Logger name="springfox" level="WARN"/>
+        <Logger name="liquibase" level="WARN"/>
+        <Logger name="sun.rmi.transport" level="WARN"/>
+
+        <Logger name="logger1" level="debug" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+<!--
+            <AppenderRef ref="FILE" />
+-->
+        </Logger>
+
+        <Root level="debug">
+            <AppenderRef ref="CONSOLE" />
+<!--
+            <AppenderRef ref="FILE" />
+-->
+        </Root>
+    </Loggers>
+
+</Configuration>

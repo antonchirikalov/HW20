@@ -1,0 +1,54 @@
+# application-local.yml
+spring:
+  profiles:
+    active: prod
+
+#Database definitions (static part). See profile .ymls for urls.
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    database: DERBY
+  datasource:
+    driver-class-name: org.apache.derby.jdbc.EmbeddedDriver
+    url: jdbc:derby:devicesDB;create=true
+
+#Vaadin Servlet defintions
+vaadin:
+  servlet:
+    production-mode: true
+
+# Main Server definition    
+server:
+  port: 8000
+
+#This is the /version endpoint for the actuator
+endpoints:
+  versionendpoint:
+    pathtofile: classpath:/VERSION
+    endpointenabled: true
+    endpointid: version
+  health:
+    sensitive: false
+  shutdown:
+    enabled: true
+  enabled: false # RFC0712-92
+
+usbdetection:
+  plugindetection:
+    schedulerrate: 100
+    timeout: 60000
+ci1532ws:
+  protocol: "http://"
+  host: "esb.toennies.net"
+  port: ":8888"
+  path: "/ci1532ws/templates"
+
+authenticationservice:
+  alreadyloggedin: true
+  pssword: hw20
+hw10:
+  port: 15000 
+help:
+  url: "http://confluence.toennies.net/display/CSTDOC/ci1429app+-+Handbuch+Hardwareserver+2.0"

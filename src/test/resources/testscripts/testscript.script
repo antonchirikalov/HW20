@@ -1,0 +1,5 @@
+wait 5000
+send "[ENQ]w5[ACK] "
+wait 5000
+receive "[ACK]"
+deactivate

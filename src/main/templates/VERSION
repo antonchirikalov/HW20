@@ -1,0 +1,9 @@
+artifact-id:${project.artifactId}
+version:${project.version}
+commit-id:${mvngit.commit.id}
+branch:${mvngit.branch}
+date-of-build:${current.timestamp}
+build-by:${user.name}
+build-with-java:${java.version}
+description:${project.description}
+profile:${profile-name}
